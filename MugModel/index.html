@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>SilentEcho Model</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Model Viewer Template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #f0f4f8, #dfe9f3);
+        transition: background 0.3s ease;
+      }
+
+      body.dark-mode {
+        background: linear-gradient(135deg, #1e1e1e, #2e2e2e);
+      }
+
+      #viewer-container {
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        position: relative;
+      }
+
+      model-viewer {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+      }
+
+      .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 12px;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10;
+      }
+
+      .top-bar {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
+      }
+
+      .dark-mode-toggle {
+        background: linear-gradient(145deg, #666, #333);
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        transition: background 0.3s ease;
+      }
+
+      .controls {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+        backdrop-filter: blur(8px);
+      }
+
+      .controls h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .controls button {
+        margin: 4px;
+        padding: 10px 16px;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        transition: background 0.3s ease;
+      }
+
+      .controls button:hover {
+        background: #555;
+      }
+
+      .color-btn {
+        width: 36px;
+        height: 36px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        margin: 5px;
+        cursor: pointer;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s ease;
+      }
+
+      .color-btn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+      }
+
+      .Hotspot {
+        background-color: #90aac9;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        box-shadow: 0 0 8px rgba(0,0,0,0.5);
+        position: relative;
+        transition: transform 0.2s ease;
+      }
+
+      .Hotspot:hover {
+        transform: scale(1.3);
+      }
+
+      .HotspotAnnotation {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        color: #222;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .Hotspot::after {
+        content: '';
+        position: absolute;
+        top: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 6px;
+        border-style: solid;
+        border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+        display: none;
+      }
+
+      .Hotspot:hover .HotspotAnnotation {
+        opacity: 1;
+      }
+
+      .Hotspot:hover::after {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="logo">SilentEcho</div>
+
+    <div class="top-bar">
+      <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </div>
+
+    <div id="viewer-container">
+      <model-viewer id="mugmodel"
+        src="Mugv.glb"
+        alt="A 3D model of SilentEcho mug"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        tone-mapping="neutral"
+        shadow-intensity="1"
+        exposure="1"
+        environment-image="neutral"
+        variant-name="v1"
+        style="background: transparent">
+
+        <!-- Hotspots with light annotation cards -->
+        <button class="Hotspot" slot="hotspot-1" data-surface="1 0 385 372 386 0.558 0.108 0.335" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Tea-Bag Holder</div>
+        </button>
+        <button class="Hotspot" slot="hotspot-4" data-surface="1493 0 2449 2366 2450 0.611 0.358 0.031" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Handle</div>
+        </button>
+        <button class="Hotspot" slot="hotspot-5" data-surface="208 0 177 170 179 0.101 0.879 0.020" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">2-way Lid</div>
+        </button>
+        <button class="Hotspot" slot="hotspot-6" data-surface="1491 0 1231 1097 1232 0.147 0.364 0.489" data-visibility-attribute="visible">
+          <div class="HotspotAnnotation">Mug</div>
+        </button>
+
+        <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+        </div>
+        <button slot="ar-button" id="ar-button">View in your space</button>
+      </model-viewer>
+    </div>
+
+    <div class="controls">
+      <div>
+        <h3>View</h3>
+        <button onclick="setCamera('bottom')">Bottom</button>
+        <button onclick="setCamera('front')">Front</button>
+        <button onclick="setCamera('top')">Top</button>
+      </div>
+      <div>
+        <h3>Color Variants</h3>
+        <button class="color-btn" style="background-color: #90aac9;" onclick="setVariant('v1')" title="Light Blue"></button>
+        <button class="color-btn" style="background-color: #181818;" onclick="setVariant('v2')" title="Black"></button>
+        <button class="color-btn" style="background-color: #d5dbd7;" onclick="setVariant('v3')" title="Mint Grey"></button>
+        <button class="color-btn" style="background-color: #a9c9ca;" onclick="setVariant('v4')" title="Pale Turquoise"></button>
+      </div>
+      <div>
+        <button onclick="playHandleAnimations()">Handle</button>
+        <button onclick="playAnchorAnimations()">Anchor</button>
+        <button onclick="pauseanimation()">Pause / Play</button>
+      </div>
+    </div>
+
+    <script>
+      function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+      }
+
+      function setCamera(view) {
+        const model = document.getElementById('mugmodel');
+        switch (view) {
+          case 'bottom':
+            model.cameraOrbit = '0deg 200deg 2.5m';
+            break;
+          case 'front':
+            model.cameraOrbit = '0deg 75deg 2.5m';
+            break;
+          case 'top':
+            model.cameraOrbit = '0deg 10deg 2.5m';
+            break;
+        }
+      }
+
+      function setVariant(name) {
+        const model = document.getElementById('mugmodel');
+        model.variantName = name;
+      }
+
+      function playHandleAnimations() {
+        const model = document.getElementById('mugmodel');
+        model.animationName = 'Handle_1';
+        model.play();
+
+        const onFirstFinished = () => {
+          model.removeEventListener('finished', onFirstFinished);
+          model.animationName = 'Handle_2';
+          model.play();
+        };
+
+        model.addEventListener('finished', onFirstFinished);
+      }
+
+      function playAnchorAnimations() {
+        const model = document.getElementById('mugmodel');
+        model.animationName = 'AnchorAction';
+        model.play();
+
+        model.addEventListener('finished', onAnchorFinished);
+      }
+
+      function pauseanimation() {
+        const model = document.getElementById('mugmodel');
+        if (model.paused) {
+          model.play();
+        } else {
+          model.pause();
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const model = document.getElementById('mugmodel');
+        model.variantName = 'v1';
+      });
+    </script>
+  </body>
+</html>
